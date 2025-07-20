@@ -54,7 +54,7 @@ ROOT_URLCONF = "prediccion_api.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / 'prediccion_api' / 'templates',],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

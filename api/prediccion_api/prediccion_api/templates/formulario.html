@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">🏥 Formulario de Predicción GRD</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <!-- Datos Demográficos -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>👥 Datos Demográficos</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.grupo_edad.id_for_label }}" class="form-label">{{ form.grupo_edad.label }}</label>
+                                        {{ form.grupo_edad }}
+                                        {% if form.grupo_edad.errors %}
+                                            <div class="text-danger">{{ form.grupo_edad.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.sexo.id_for_label }}" class="form-label">{{ form.sexo.label }}</label>
+                                        {{ form.sexo }}
+                                        {% if form.sexo.errors %}
+                                            <div class="text-danger">{{ form.sexo.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Datos de Ingreso y Alta -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>🏨 Datos de Ingreso y Alta</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.tipo_ingreso.id_for_label }}" class="form-label">{{ form.tipo_ingreso.label }}</label>
+                                        {{ form.tipo_ingreso }}
+                                        {% if form.tipo_ingreso.errors %}
+                                            <div class="text-danger">{{ form.tipo_ingreso.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.servicio_alta.id_for_label }}" class="form-label">{{ form.servicio_alta.label }}</label>
+                                        {{ form.servicio_alta }}
+                                        {% if form.servicio_alta.errors %}
+                                            <div class="text-danger">{{ form.servicio_alta.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.situacion_alta.id_for_label }}" class="form-label">{{ form.situacion_alta.label }}</label>
+                                        {{ form.situacion_alta }}
+                                        {% if form.situacion_alta.errors %}
+                                            <div class="text-danger">{{ form.situacion_alta.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.cuidados_intensivos.id_for_label }}" class="form-label">{{ form.cuidados_intensivos.label }}</label>
+                                        {{ form.cuidados_intensivos }}
+                                        {% if form.cuidados_intensivos.errors %}
+                                            <div class="text-danger">{{ form.cuidados_intensivos.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diagnóstico -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>🩺 Diagnóstico</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="{{ form.dx_principal.id_for_label }}" class="form-label">{{ form.dx_principal.label }}</label>
+                                {{ form.dx_principal }}
+                                {% if form.dx_principal.errors %}
+                                    <div class="text-danger">{{ form.dx_principal.errors }}</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estancia y UCI -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>⏰ Estancia y UCI</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.estancia_grupo.id_for_label }}" class="form-label">{{ form.estancia_grupo.label }}</label>
+                                        {{ form.estancia_grupo }}
+                                        {% if form.estancia_grupo.errors %}
+                                            <div class="text-danger">{{ form.estancia_grupo.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.uci_grupo.id_for_label }}" class="form-label">{{ form.uci_grupo.label }}</label>
+                                        {{ form.uci_grupo }}
+                                        {% if form.uci_grupo.errors %}
+                                            <div class="text-danger">{{ form.uci_grupo.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comorbilidades y Procedimientos -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5>⚕️ Comorbilidades y Procedimientos</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.tiene_comorbilidad.id_for_label }}" class="form-label">{{ form.tiene_comorbilidad.label }}</label>
+                                        {{ form.tiene_comorbilidad }}
+                                        {% if form.tiene_comorbilidad.errors %}
+                                            <div class="text-danger">{{ form.tiene_comorbilidad.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="{{ form.tiene_procedimiento.id_for_label }}" class="form-label">{{ form.tiene_procedimiento.label }}</label>
+                                        {{ form.tiene_procedimiento }}
+                                        {% if form.tiene_procedimiento.errors %}
+                                            <div class="text-danger">{{ form.tiene_procedimiento.errors }}</div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Botón de envío -->
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            🎯 Predecir Código GRD
+                        </button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

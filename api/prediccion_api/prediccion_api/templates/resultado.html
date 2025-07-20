@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Resultado - Sistema de Predicción{% endblock %}
+
+{% block header %}Resultado de la Predicción GRD{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">🎯 Resultado de la Predicción GRD</h3>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-success">
+                    <h5>✅ Datos procesados exitosamente</h5>
+                    <p>{{ resultado }}</p>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h6><strong>👥 Datos Demográficos</strong></h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li><strong>Grupo Edad:</strong> {{ datos.grupo_edad }}</li>
+                                    <li><strong>Sexo:</strong> {{ datos.sexo }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h6><strong>🏨 Datos de Ingreso</strong></h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li><strong>Tipo de ingreso:</strong> {{ datos.tipo_ingreso }}</li>
+                                    <li><strong>Servicio Alta:</strong> {{ datos.servicio_alta }}</li>
+                                    <li><strong>Situación al alta:</strong> {{ datos.situacion_alta }}</li>
+                                    <li><strong>Cuidados intensivos:</strong> {{ datos.cuidados_intensivos }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h6><strong>🩺 Datos Clínicos</strong></h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li><strong>Diagnóstico principal:</strong> {{ datos.dx_principal }}</li>
+                                    <li><strong>Estancia Grupo:</strong> {{ datos.estancia_grupo }}</li>
+                                    <li><strong>UCI Grupo:</strong> {{ datos.uci_grupo }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h6><strong>⚕️ Comorbilidades y Procedimientos</strong></h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
+                                    <li><strong>Comorbilidad:</strong> {{ datos.tiene_comorbilidad }}</li>
+                                    <li><strong>Procedimiento:</strong> {{ datos.tiene_procedimiento }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="alert alert-info mt-3">
+                    <h6>🔮 Predicción del Código GRD:</h6>
+                    <p class="mb-0"><strong>Código GRD estimado:</strong> [Aquí irá la predicción del modelo]</p>
+                </div>
+                
+                <div class="d-grid gap-2">
+                    <a href="{% url 'formulario' %}" class="btn btn-primary">🔄 Nueva Predicción</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
