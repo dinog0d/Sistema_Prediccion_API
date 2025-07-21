@@ -80,57 +80,57 @@ class PrediccionForm(forms.Form):
     
     PROCEDIMIENTO_CHOICES = [
         ('', 'Seleccione...'),
-        (False, 'Sin procedimiento'),
-        (True, 'Proc1'),
-        (True, 'Proc2'),
-        (True, 'Proc3'),
-        (True, 'Proc4'),
-        (True, 'Proc5'),
-        (True, 'Proc6'),
-        (True, 'Proc7'),
-        (True, 'Proc8'),
-        (True, 'Proc9'),
-        (True, 'Proc10'),
-        (True, 'Proc11'),
-        (True, 'Proc12'),
-        (True, 'Proc13'),
-        (True, 'Proc14'),
-        (True, 'Proc15'),
-        (True, 'Proc16'),
-        (True, 'Proc17'),
-        (True, 'Proc18'),
-        (True, 'Proc19'),
-        (True, 'Proc20'),
-        (True, 'Proc21'),
-        (True, 'Proc22'),
-        (True, 'Proc23'),
-        (True, 'Proc24'),
-        (True, 'Proc25'),
-        (True, 'Proc26'),
-        (True, 'Proc27'),
-        (True, 'Proc28'),
-        (True, 'Proc29'),
-        (True, 'Proc30'),
+        ('0', 'Sin procedimiento'),
+        ('Proc1', 'Proc1'),
+        ('Proc2', 'Proc2'),
+        ('Proc3', 'Proc3'),
+        ('Proc4', 'Proc4'),
+        ('Proc5', 'Proc5'),
+        ('Proc6', 'Proc6'),
+        ('Proc7', 'Proc7'),
+        ('Proc8', 'Proc8'),
+        ('Proc9', 'Proc9'),
+        ('Proc10', 'Proc10'),
+        ('Proc11', 'Proc11'),
+        ('Proc12', 'Proc12'),
+        ('Proc13', 'Proc13'),
+        ('Proc14', 'Proc14'),
+        ('Proc15', 'Proc15'),
+        ('Proc16', 'Proc16'),
+        ('Proc17', 'Proc17'),
+        ('Proc18', 'Proc18'),
+        ('Proc19', 'Proc19'),
+        ('Proc20', 'Proc20'),
+        ('Proc21', 'Proc21'),
+        ('Proc22', 'Proc22'),
+        ('Proc23', 'Proc23'),
+        ('Proc24', 'Proc24'),
+        ('Proc25', 'Proc25'),
+        ('Proc26', 'Proc26'),
+        ('Proc27', 'Proc27'),
+        ('Proc28', 'Proc28'),
+        ('Proc29', 'Proc29'),
+        ('Proc30', 'Proc30'),
     ]
 
     COMORBILIDAD_CHOICES = [
         ('', 'Seleccione...'),
-        (False, 'Sin comorbilidad'),
-        (True, 'Dxr 1'),
-        (True, 'Dxr 2'),
-        (True, 'Dxr 3'),
-        (True, 'Dxr 4'),
-        (True, 'Dxr 5'),
-        (True, 'Dxr 6'),
-        (True, 'Dxr 7'),
-        (True, 'Dxr 8'),
-        (True, 'Dxr 9'),
+        ('0', 'Sin comorbilidad'),
+        ('Dxr 1', 'Dxr 1'),
+        ('Dxr 2', 'Dxr 2'),
+        ('Dxr 3', 'Dxr 3'),
+        ('Dxr 4', 'Dxr 4'),
+        ('Dxr 5', 'Dxr 5'),
+        ('Dxr 6', 'Dxr 6'),
+        ('Dxr 7', 'Dxr 7'),
+        ('Dxr 8', 'Dxr 8'),
+        ('Dxr 9', 'Dxr 9'),
     ]
 
     SINO_CHOICES = [
         ('', 'Seleccione...'),
-        (True, 'Sí'),
-        (False, 'No'),
+        ('si', 'Sí'),
+        ('no', 'No'),
     ]
 
     DX_PPAL_CHOICES = [
@@ -147,8 +147,6 @@ class PrediccionForm(forms.Form):
         ('I11', 'I11'),
     ]
 
-
-    
     # Campos del formulario
     grupo_edad = forms.ChoiceField(
         label='Grupo Edad',
@@ -186,13 +184,11 @@ class PrediccionForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     
-
     dx_principal = forms.ChoiceField(  
         label='Dx principal de egreso .1',
         choices=DX_PPAL_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-
     
     estancia_grupo = forms.ChoiceField(
         label='Estancia Grupo',
@@ -217,5 +213,3 @@ class PrediccionForm(forms.Form):
         choices=PROCEDIMIENTO_CHOICES,
         widget=forms.Select(attrs={'class': 'form-control'})
     )
-    
- 

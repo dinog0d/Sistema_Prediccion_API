@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Resultado - Sistema de Predicción{% endblock %}
+{% block title %}Resultado - Sistema de Predicción GRD{% endblock %}
 
 {% block header %}Resultado de la Predicción GRD{% endblock %}
 
@@ -26,21 +26,37 @@
                             <div class="card-body">
                                 <ul class="list-unstyled">
                                     <li><strong>Grupo Edad:</strong> {{ datos.grupo_edad }}</li>
-                                    <li><strong>Sexo:</strong> {{ datos.sexo }}</li>
+                                    <li><strong>Sexo:</strong> 
+                                        {% if datos.sexo == 'M' %}
+                                            Masculino
+                                        {% elif datos.sexo == 'F' %}
+                                            Femenino
+                                        {% else %}
+                                            {{ datos.sexo }}
+                                        {% endif %}
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                         
                         <div class="card mb-3">
                             <div class="card-header">
-                                <h6><strong>🏨 Datos de Ingreso</strong></h6>
+                                <h6><strong>🏨 Datos de Ingreso y Alta</strong></h6>
                             </div>
                             <div class="card-body">
                                 <ul class="list-unstyled">
                                     <li><strong>Tipo de ingreso:</strong> {{ datos.tipo_ingreso }}</li>
                                     <li><strong>Servicio Alta:</strong> {{ datos.servicio_alta }}</li>
                                     <li><strong>Situación al alta:</strong> {{ datos.situacion_alta }}</li>
-                                    <li><strong>Cuidados intensivos:</strong> {{ datos.cuidados_intensivos }}</li>
+                                    <li><strong>Cuidados intensivos:</strong> 
+                                        {% if datos.cuidados_intensivos == True %}
+                                            Sí
+                                        {% elif datos.cuidados_intensivos == False %}
+                                            No
+                                        {% else %}
+                                            {{ datos.cuidados_intensivos }}
+                                        {% endif %}
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -49,11 +65,21 @@
                     <div class="col-md-6">
                         <div class="card mb-3">
                             <div class="card-header">
-                                <h6><strong>🩺 Datos Clínicos</strong></h6>
+                                <h6><strong>🩺 Diagnóstico</strong></h6>
                             </div>
                             <div class="card-body">
                                 <ul class="list-unstyled">
                                     <li><strong>Diagnóstico principal:</strong> {{ datos.dx_principal }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <h6><strong>⏰ Estancia y UCI</strong></h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled">
                                     <li><strong>Estancia Grupo:</strong> {{ datos.estancia_grupo }}</li>
                                     <li><strong>UCI Grupo:</strong> {{ datos.uci_grupo }}</li>
                                 </ul>
@@ -66,21 +92,99 @@
                             </div>
                             <div class="card-body">
                                 <ul class="list-unstyled">
-                                    <li><strong>Comorbilidad:</strong> {{ datos.tiene_comorbilidad }}</li>
-                                    <li><strong>Procedimiento:</strong> {{ datos.tiene_procedimiento }}</li>
+                                    <li><strong>Comorbilidad:</strong> 
+                                        {% if datos.tiene_comorbilidad == False %}
+                                            Sin comorbilidad
+                                        {% elif datos.tiene_comorbilidad == True %}
+                                            Sí tiene comorbilidad
+                                        {% else %}
+                                            {{ datos.tiene_comorbilidad }}
+                                        {% endif %}
+                                    </li>
+                                    <li><strong>Procedimiento:</strong> 
+                                        {% if datos.tiene_procedimiento == False %}
+                                            Sin procedimiento
+                                        {% elif datos.tiene_procedimiento == True %}
+                                            Sí tiene procedimiento
+                                        {% else %}
+                                            {{ datos.tiene_procedimiento }}
+                                        {% endif %}
+                                    </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="alert alert-info mt-3">
-                    <h6>🔮 Predicción del Código GRD:</h6>
-                    <p class="mb-0"><strong>Código GRD estimado:</strong> [Aquí irá la predicción del modelo]</p>
+
+                
+                <!-- Resumen de todos los datos -->
+                <div class="mt-4">
+                    <details class="mb-3">
+                        <summary class="btn btn-outline-secondary">📋 Ver resumen completo de datos</summary>
+                        <div class="mt-3 p-3 border rounded">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Datos enviados:</h6>
+                                    <ul class="small">
+                                        <li>Grupo Edad: {{ datos.grupo_edad }}</li>
+                                        <li>Sexo: {{ datos.sexo }}</li>
+                                        <li>Tipo de ingreso: {{ datos.tipo_ingreso }}</li>
+                                        <li>Servicio Alta: {{ datos.servicio_alta }}</li>
+                                        <li>Cuidados intensivos: {{ datos.cuidados_intensivos }}</li>
+                                        <li>Situación al alta: {{ datos.situacion_alta }}</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Datos clínicos:</h6>
+                                    <ul class="small">
+                                        <li>Diagnóstico principal: {{ datos.dx_principal }}</li>
+                                        <li>Estancia Grupo: {{ datos.estancia_grupo }}</li>
+                                        <li>UCI Grupo: {{ datos.uci_grupo }}</li>
+                                        <li>Comorbilidad: {{ datos.tiene_comorbilidad }}</li>
+                                        <li>Procedimiento: {{ datos.tiene_procedimiento }}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
                 </div>
                 
-                <div class="d-grid gap-2">
-                    <a href="{% url 'formulario' %}" class="btn btn-primary">🔄 Nueva Predicción</a>
+                <div class="alert alert-info mt-3">
+                    <h6>🔮 Predicción del Código GRD:</h6>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Código GRD estimado:</strong> 
+                                {% if prediccion.error %}
+                                    <span class="badge bg-danger fs-6">{{ prediccion.error }}</span>
+                                {% else %}
+                                    <span class="badge bg-primary fs-6">{{ prediccion.codigo_grd }}</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="mb-1"><strong>Confianza:</strong> 
+                                {% if prediccion.error %}
+                                    <span class="badge bg-secondary fs-6">N/A</span>
+                                {% else %}
+                                    <span class="badge bg-success fs-6">{{ prediccion.confianza }}%</span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    {% if not prediccion.error %}
+                    <div class="mt-3">
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" 
+                                 style="width: {{ prediccion.confianza }}%" 
+                                 aria-valuenow="{{ prediccion.confianza }}" 
+                                 aria-valuemin="0" aria-valuemax="100">
+                                {{ prediccion.confianza }}% de confianza
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>

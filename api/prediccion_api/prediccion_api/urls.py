@@ -21,6 +21,5 @@ from . import views
 
 urlpatterns = [
     path("", views.formulario_prediccion, name='formulario'),
-    path("hola/", views.index),
     path("admin/", admin.site.urls),
 ]
