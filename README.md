@@ -25,7 +25,7 @@
 
 El sistema automatiza la asignación de códigos GRD, reduciendo el tiempo de codificación manual y mejorando la precisión en la gestión hospitalaria.
 
-La rama en la que se encuentra la api es <ins>project_web</ins>
+👁️La rama en la que se encuentra la api es <ins>project_web</ins>👁️
 
 ---
 
@@ -107,23 +107,41 @@ venv\Scripts\activate
 
 sistema-prediccion-grd/
 ├── 📁 api/
+
 │   └── 📁 prediccion_api/
+
 │       ├── 📁 prediccion_api/
+
 │       │   ├── 📄 __init__.py
+
 │       │   ├── ⚙️ settings.py
+
 │       │   ├── 🔗 urls.py
+
 │       │   ├── 🌐 wsgi.py
+
 │       │   ├── 📝 forms.py              # Formularios Django
+
 │       │   ├── 👁️ views.py              # Lógica de vistas
+
 │       │   ├── 📁 modelo/
+
 │       │   │   ├── 🧠 modelo_xgboost.py # Clase del modelo ML
+
 │       │   │   └── 💾 modelo_xgboost.pkl # Modelo entrenado
+
 │       │   └── 📁 templates/
+
 │       │       ├── 🎨 base.html         # Template base
+
 │       │       ├── 📋 formulario.html   # Formulario principal
+
 │       │       └── 📊 resultado.html    # Página de resultados
+
 │       └── ⚡ manage.py
+
 ├── 📄 requirements.txt
+
 └── 📖 README.md
 
 **Autores**
