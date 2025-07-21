@@ -59,27 +59,35 @@ class PrediccionGRD:
         for comorbilidad in comorbilidades_esperadas:
             datos_procesados[comorbilidad] = 0
         
-        # Activar la comorbilidad específica seleccionada
-        comorbilidad_seleccionada = datos_formulario['tiene_comorbilidad']
-        if comorbilidad_seleccionada != '0':
-            # Mapear las comorbilidades del formulario a las del modelo
-            mapeo_comorbilidades = {
-                'Dxr 1': 'Tiene_I10',
-                'Dxr 2': 'Tiene_Z720', 
-                'Dxr 3': 'Tiene_E038',
-                'Dxr 4': 'Tiene_I270',
-                'Dxr 5': 'Tiene_I120',
-                'Dxr 6': 'Tiene_E106',
-                'Dxr 7': 'Tiene_D648',
-                'Dxr 8': 'Tiene_E116',
-                'Dxr 9': 'Tiene_J448'
-            }
+        # Obtener las comorbilidades seleccionadas (ahora es una lista)
+        comorbilidades_seleccionadas = datos_formulario.get('tiene_comorbilidad', [])
+        
+        # Asegurar que sea una lista
+        if isinstance(comorbilidades_seleccionadas, str):
+            comorbilidades_seleccionadas = [comorbilidades_seleccionadas]
+        elif not isinstance(comorbilidades_seleccionadas, list):
+            comorbilidades_seleccionadas = ['0']
             
-            if comorbilidad_seleccionada in mapeo_comorbilidades:
-                datos_procesados[mapeo_comorbilidades[comorbilidad_seleccionada]] = 1
+        mapeo_comorbilidades = {
+            'Dxr 1': 'Tiene_I10',
+            'Dxr 2': 'Tiene_Z720', 
+            'Dxr 3': 'Tiene_E038',
+            'Dxr 4': 'Tiene_I270',
+            'Dxr 5': 'Tiene_I120',
+            'Dxr 6': 'Tiene_E106',
+            'Dxr 7': 'Tiene_D648',
+            'Dxr 8': 'Tiene_E116',
+            'Dxr 9': 'Tiene_J448'
+        }
+        
+        tiene_comorbilidad = False
+        for comorbilidad in comorbilidades_seleccionadas:
+            if comorbilidad != '0' and comorbilidad in mapeo_comorbilidades:
+                datos_procesados[mapeo_comorbilidades[comorbilidad]] = 1
+                tiene_comorbilidad = True
         
         # Agregar la variable general de comorbilidad
-        datos_procesados['Tiene_comorbilidad'] = 1 if comorbilidad_seleccionada != '0' else 0
+        datos_procesados['Tiene_comorbilidad'] = 1 if tiene_comorbilidad else 0
         
         # Agregar todas las características de procedimientos que el modelo espera
         procedimientos_esperados = [
@@ -93,53 +101,61 @@ class PrediccionGRD:
         for procedimiento in procedimientos_esperados:
             datos_procesados[procedimiento] = 0
         
-        # Activar el procedimiento específico seleccionado
-        procedimiento_seleccionado = datos_formulario['tiene_procedimiento']
-        if procedimiento_seleccionado != '0':
-            # Mapear los procedimientos del formulario a los del modelo
-            mapeo_procedimientos = {
-                'Proc1': 'Tiene_87.44',
-                'Proc2': 'Tiene_89.51',
-                'Proc3': 'Tiene_88.72',
-                'Proc4': 'Tiene_87.03',
-                'Proc5': 'Tiene_45.16',
-                'Proc6': 'Tiene_88.76',
-                'Proc7': 'Tiene_87.41',
-                'Proc8': 'Tiene_88.01',
-                'Proc9': 'Tiene_88.38',
-                'Proc10': 'Tiene_88.75',
-                'Proc11': 'Tiene_45.23',
-                'Proc12': 'Tiene_88.77',
-                'Proc13': 'Tiene_38.93',
-                'Proc14': 'Tiene_89.5',
-                'Proc15': 'Tiene_88.71',
-                'Proc16': 'Tiene_89.14',
-                'Proc17': 'Tiene_88.91',
-                'Proc18': 'Tiene_88.79',
-                'Proc19': 'Tiene_88.26',
-                'Proc20': 'Tiene_88.27',
-                'Proc21': 'Tiene_87.44',  # Mapear los extras a algunos existentes
-                'Proc22': 'Tiene_89.51',
-                'Proc23': 'Tiene_88.72',
-                'Proc24': 'Tiene_87.03',
-                'Proc25': 'Tiene_45.16',
-                'Proc26': 'Tiene_88.76',
-                'Proc27': 'Tiene_87.41',
-                'Proc28': 'Tiene_88.01',
-                'Proc29': 'Tiene_88.38',
-                'Proc30': 'Tiene_88.75'
-            }
+        # Obtener los procedimientos seleccionados (ahora es una lista)
+        procedimientos_seleccionados = datos_formulario.get('tiene_procedimiento', [])
+        
+        # Asegurar que sea una lista
+        if isinstance(procedimientos_seleccionados, str):
+            procedimientos_seleccionados = [procedimientos_seleccionados]
+        elif not isinstance(procedimientos_seleccionados, list):
+            procedimientos_seleccionados = ['0']
             
-            if procedimiento_seleccionado in mapeo_procedimientos:
-                datos_procesados[mapeo_procedimientos[procedimiento_seleccionado]] = 1
+        mapeo_procedimientos = {
+            'Proc1': 'Tiene_87.44',
+            'Proc2': 'Tiene_89.51',
+            'Proc3': 'Tiene_88.72',
+            'Proc4': 'Tiene_87.03',
+            'Proc5': 'Tiene_45.16',
+            'Proc6': 'Tiene_88.76',
+            'Proc7': 'Tiene_87.41',
+            'Proc8': 'Tiene_88.01',
+            'Proc9': 'Tiene_88.38',
+            'Proc10': 'Tiene_88.75',
+            'Proc11': 'Tiene_45.23',
+            'Proc12': 'Tiene_88.77',
+            'Proc13': 'Tiene_38.93',
+            'Proc14': 'Tiene_89.5',
+            'Proc15': 'Tiene_88.71',
+            'Proc16': 'Tiene_89.14',
+            'Proc17': 'Tiene_88.91',
+            'Proc18': 'Tiene_88.79',
+            'Proc19': 'Tiene_88.26',
+            'Proc20': 'Tiene_88.27',
+            'Proc21': 'Tiene_87.44',
+            'Proc22': 'Tiene_89.51',
+            'Proc23': 'Tiene_88.72',
+            'Proc24': 'Tiene_87.03',
+            'Proc25': 'Tiene_45.16',
+            'Proc26': 'Tiene_88.76',
+            'Proc27': 'Tiene_87.41',
+            'Proc28': 'Tiene_88.01',
+            'Proc29': 'Tiene_88.38',
+            'Proc30': 'Tiene_88.75'
+        }
+        
+        tiene_procedimiento = False
+        for procedimiento in procedimientos_seleccionados:
+            if procedimiento != '0' and procedimiento in mapeo_procedimientos:
+                datos_procesados[mapeo_procedimientos[procedimiento]] = 1
+                tiene_procedimiento = True
         
         # Agregar la variable general de procedimiento
-        datos_procesados['Tiene_procedimiento'] = 1 if procedimiento_seleccionado != '0' else 0
+        datos_procesados['Tiene_procedimiento'] = 1 if tiene_procedimiento else 0
         
         # Crear DataFrame y ordenar las columnas según el orden esperado por el modelo
         df = pd.DataFrame([datos_procesados])
         
-        # Orden esperado por el modelo (basado en el error)
+        # Orden esperado por el modelo
         columnas_ordenadas = [
             'Grupo Edad', 'Sexo', 'Tipo de ingreso', 'ServicioAlta', 'Cuidados intensivos',
             'Situacion al alta', 'Dx principal de egreso .1', 'Estancia Grupo', 'UCI Grupo',
@@ -195,6 +211,10 @@ class PrediccionGRD:
             # Preparar los datos
             datos_df = self.preparar_datos(datos_formulario)
             
+            # Debug: mostrar las características
+            print("Características preparadas:")
+            print(datos_df.head())
+            
             # Realizar predicción
             prediccion = self.pipeline.predict(datos_df)[0]
             
@@ -213,6 +233,7 @@ class PrediccionGRD:
             }
             
         except Exception as e:
+            print(f"Error en predicción: {e}")  # Debug
             return {
                 'prediccion': 'Error',
                 'confianza': 0,

@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 
+{% block title %}Formulario - Sistema de Predicción GRD{% endblock %}
+
+{% block header %}Formulario de Predicción GRD{% endblock %}
+
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-10">
         <div class="card">
             <div class="card-header">
                 <h3 class="text-center">🏥 Formulario de Predicción GRD</h3>
@@ -14,7 +18,7 @@
                     <!-- Datos Demográficos -->
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5>👥 Datos Demográficos</h5>
+                            <h5>Datos Demográficos</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -43,7 +47,7 @@
                     <!-- Datos de Ingreso y Alta -->
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5>🏨 Datos de Ingreso y Alta</h5>
+                            <h5>Datos de Ingreso y Alta</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -108,7 +112,7 @@
                     <!-- Estancia y UCI -->
                     <div class="card mb-4">
                         <div class="card-header">
-                            <h5>⏰ Estancia y UCI</h5>
+                            <h5>Estancia y UCI</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
@@ -143,19 +147,48 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="{{ form.tiene_comorbilidad.id_for_label }}" class="form-label">{{ form.tiene_comorbilidad.label }}</label>
-                                        {{ form.tiene_comorbilidad }}
+                                        <label class="form-label">
+                                            <strong>{{ form.tiene_comorbilidad.label }}</strong>
+                                        </label>
+                                        <div class="border rounded p-3" style="max-height: 250px; overflow-y: auto; background-color: #f8f9fa;">
+                                            {% for value, label in form.tiene_comorbilidad.field.choices %}
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                           name="tiene_comorbilidad" 
+                                                           value="{{ value }}" 
+                                                           id="id_tiene_comorbilidad_{{ forloop.counter0 }}">
+                                                    <label class="form-check-label" for="id_tiene_comorbilidad_{{ forloop.counter0 }}">
+                                                        {{ label }}
+                                                    </label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
                                         {% if form.tiene_comorbilidad.errors %}
-                                            <div class="text-danger">{{ form.tiene_comorbilidad.errors }}</div>
+                                            <div class="text-danger mt-2">{{ form.tiene_comorbilidad.errors }}</div>
                                         {% endif %}
                                     </div>
                                 </div>
+                                
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="{{ form.tiene_procedimiento.id_for_label }}" class="form-label">{{ form.tiene_procedimiento.label }}</label>
-                                        {{ form.tiene_procedimiento }}
+                                        <label class="form-label">
+                                            <strong>{{ form.tiene_procedimiento.label }}</strong>
+                                        </label>
+                                        <div class="border rounded p-3" style="max-height: 250px; overflow-y: auto; background-color: #f8f9fa;">
+                                            {% for value, label in form.tiene_procedimiento.field.choices %}
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                           name="tiene_procedimiento" 
+                                                           value="{{ value }}" 
+                                                           id="id_tiene_procedimiento_{{ forloop.counter0 }}">
+                                                    <label class="form-check-label" for="id_tiene_procedimiento_{{ forloop.counter0 }}">
+                                                        {{ label }}
+                                                    </label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
                                         {% if form.tiene_procedimiento.errors %}
-                                            <div class="text-danger">{{ form.tiene_procedimiento.errors }}</div>
+                                            <div class="text-danger mt-2">{{ form.tiene_procedimiento.errors }}</div>
                                         {% endif %}
                                     </div>
                                 </div>
@@ -163,16 +196,57 @@
                         </div>
                     </div>
                     
-                    <!-- Botón de envío -->
+                    <!-- Mostrar errores generales del formulario -->
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <h6>❌ Errores en el formulario:</h6>
+                            {% for field, errors in form.errors.items %}
+                                <ul class="mb-0">
+                                    <li><strong>{{ field }}:</strong> {{ errors|join:", " }}</li>
+                                </ul>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Botones -->
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary btn-lg">
-                            🎯 Predecir Código GRD
+                            Predecir Código GRD
                         </button>
-
+                        <a href="{% url 'formulario' %}" class="btn btn-outline-secondary">
+                            Limpiar Formulario
+                        </a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<style>
+.form-check {
+    padding-left: 1.5rem;
+}
+
+.form-check-input {
+    margin-left: -1.5rem;
+    cursor: pointer;
+}
+
+.form-check-label {
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin-left: 0.25rem;
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.card-header h5 {
+    margin-bottom: 0;
+    color: #495057;
+}
+</style>
 {% endblock %}

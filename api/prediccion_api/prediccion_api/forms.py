@@ -79,7 +79,6 @@ class PrediccionForm(forms.Form):
     ]
     
     PROCEDIMIENTO_CHOICES = [
-        ('', 'Seleccione...'),
         ('0', 'Sin procedimiento'),
         ('Proc1', 'Proc1'),
         ('Proc2', 'Proc2'),
@@ -114,7 +113,6 @@ class PrediccionForm(forms.Form):
     ]
 
     COMORBILIDAD_CHOICES = [
-        ('', 'Seleccione...'),
         ('0', 'Sin comorbilidad'),
         ('Dxr 1', 'Dxr 1'),
         ('Dxr 2', 'Dxr 2'),
@@ -202,14 +200,16 @@ class PrediccionForm(forms.Form):
         widget=forms.Select(attrs={'class': 'form-control'})
     )
     
-    tiene_comorbilidad = forms.ChoiceField(
-        label='comorbilidad',
+    tiene_comorbilidad = forms.MultipleChoiceField(
+        label='Comorbilidades',
         choices=COMORBILIDAD_CHOICES,
-        widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
+        required=False
     )
     
-    tiene_procedimiento = forms.ChoiceField(
-        label='Tiene_procedimiento',
+    tiene_procedimiento = forms.MultipleChoiceField(
+        label='Procedimientos',
         choices=PROCEDIMIENTO_CHOICES,
-        widget=forms.Select(attrs={'class': 'form-control'})
+        widget=forms.CheckboxSelectMultiple(attrs={'class': 'form-check-input'}),
+        required=False
     )
