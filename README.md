@@ -15,9 +15,7 @@
 - [Instalación](#instalación)
 - [Uso](#uso)
 - [Estructura del Proyecto](#estructura-del-proyecto)
-- [API Reference](#api-reference)
-- [Contribución](#contribución)
-- [Licencia](#licencia)
+
 
 ---
 
@@ -26,6 +24,8 @@
 > Sistema web desarrollado en **Django** que utiliza **Machine Learning** para predecir **Códigos GRD (Grupos Relacionados de Diagnóstico)** basándose en datos clínicos y demográficos de pacientes hospitalarios.
 
 El sistema automatiza la asignación de códigos GRD, reduciendo el tiempo de codificación manual y mejorando la precisión en la gestión hospitalaria.
+
+La rama en la que se encuentra la api es <ins>project_web</ins>
 
 ---
 
@@ -86,6 +86,45 @@ El sistema automatiza la asignación de códigos GRD, reduciendo el tiempo de co
 | **Clínicas** | 7 | Diagnóstico principal, tipo ingreso, servicio alta, etc. |
 | **Comorbilidades** | 36 | 1 general + 35 específicas (CIE-10) |
 | **Procedimientos** | 21 | 1 general + 20 específicos |
+
+## 🚀 Instalación
+
+✅Python 3.8+
+✅pip
+✅Git
+
+### Crear entorno virtual
+
+python -m venv venv
+
+# En Linux/Mac
+source venv/bin/activate
+
+# En Windows
+venv\Scripts\activate
+
+## Estructura del proyecto
+
+sistema-prediccion-grd/
+├── 📁 api/
+│   └── 📁 prediccion_api/
+│       ├── 📁 prediccion_api/
+│       │   ├── 📄 __init__.py
+│       │   ├── ⚙️ settings.py
+│       │   ├── 🔗 urls.py
+│       │   ├── 🌐 wsgi.py
+│       │   ├── 📝 forms.py              # Formularios Django
+│       │   ├── 👁️ views.py              # Lógica de vistas
+│       │   ├── 📁 modelo/
+│       │   │   ├── 🧠 modelo_xgboost.py # Clase del modelo ML
+│       │   │   └── 💾 modelo_xgboost.pkl # Modelo entrenado
+│       │   └── 📁 templates/
+│       │       ├── 🎨 base.html         # Template base
+│       │       ├── 📋 formulario.html   # Formulario principal
+│       │       └── 📊 resultado.html    # Página de resultados
+│       └── ⚡ manage.py
+├── 📄 requirements.txt
+└── 📖 README.md
 
 **Autores**
 
